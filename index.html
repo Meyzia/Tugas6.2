@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <style>
+        html{
+            font-family: 'Quicksand', sans-serif;
+        }
+        table{
+            vertical-align: middle;
+            border-collapse: collapse;
+            margin: auto;
+        }
+        table td{
+            padding: 10px;
+            border: 1px solid gray;
+        }
+        table tr.header{
+            font-weight: bolder;
+            color: white;
+            background-color: black;
+        }
+        table td.no{
+            font-weight: bold;
+        }
+        tr:hover{
+          background-color: rgb(235, 235, 235);  
+        }
+        h1{
+            text-align: center;
+            font-size: 28pt;
+            font-weight: bolder;
+            text-shadow: 3px 3px lightgray;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>WEB SCRAPPING</h1>
+    <br>
+    <div id="scrap">
+        
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            $.get('scrap.json',function(obj){
+  
+                var str = "<table>";
+  
+                str+="<tr class='header'><td>No</td><td>Judul Headline</td><td>Kategori</td><td>Publikasi</td><td>Waktu Scraping</td></tr>";
+  
+                $.each(obj, function(n,data){
+                    str+="<tr><td class='no'>"+(n+1)+".</td>";
+                    str+="<td>"+data.judul+"</td>";
+                    str+="<td>"+data.kategori+"</td>";
+                    str+="<td>"+data.waktu_publish+"</td>";
+                    str+="<td>"+data.waktu_scraping+"</td></tr>";
+                });
+                
+                str += "</table>";
+                $('#scrap').html(str);
+            });
+        });
+    </script>
+</body>
+</html>
